@@ -12,7 +12,7 @@ do_stuff () {
 		else
 			FULLDIR="`echo "$LINE" | cut -d',' -f1`"
 		fi
-		BASEDIR="`echo "$FULLDIR" | sed -E -n "s_/(home|mnt)/(.*?/)__p"`"
+		BASEDIR="`echo "$FULLDIR" | sed -E -n "s_/(home|mnt)/(david|pool|fastpool)/__p"`"
 		echo "Backing up $FULLDIR to google:$BASEDIR"
 		if [ $NUMPARAMETERS -eq 0 ]; then
 			rclone copy -P --user-agent D8jRTyaa0POq "$FULLDIR" "google:$BASEDIR"
@@ -36,7 +36,7 @@ do_stuff () {
 			echo "-----------------------------------------------------------------"
 			echo ""
 		fi
-	done < "$BACKUP_LIST"
+	done < <(grep -v '#' "$BACKUP_LIST")
 }
 
 LOCKFILE="/tmp/`basename $0`.lock"
