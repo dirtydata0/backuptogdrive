@@ -6,18 +6,18 @@ BACKUP_LIST="./backup_dirs.txt"
 do_stuff () {
 	while IFS= read -r LINE
 	do
-		echo "$LINE"
 		NUMPARAMETERS=`echo "$LINE" | awk -F '[\t,]' '{print NF-1}'`
 		if [ $NUMPARAMETERS -eq 0 ]; then
 			FULLDIR="`echo "$LINE"`"
 		else
 			FULLDIR="`echo "$LINE" | cut -d',' -f1`"
 		fi
-		echo "$FULLDIR"
-		BASEDIR="`echo "$FULLDIR" | sed -E -n "s_/(home|mnt)/(david|pool/|fastpool/)__p"`"
+		BASEDIR="`echo "$FULLDIR" | sed -E -n "s_/(home|mnt)/(.*?/)__p"`"
 		echo "Backing up $FULLDIR to google:$BASEDIR"
 		if [ $NUMPARAMETERS -eq 0 ]; then
 			rclone copy -P --user-agent D8jRTyaa0POq "$FULLDIR" "google:$BASEDIR"
+			echo "-----------------------------------------------------------------"
+			echo ""
 		else
 			COUNT=0
 			PARAMETERS="--exclude="
@@ -33,6 +33,8 @@ do_stuff () {
 				fi
 			done
 			rclone move -P --user-agent D8jRTyaa0POq "$FULLDIR" "google:$BASEDIR" "$PARAMETERS"
+			echo "-----------------------------------------------------------------"
+			echo ""
 		fi
 	done < "$BACKUP_LIST"
 }
