@@ -1,6 +1,6 @@
 /mnt/pool/Video/Home Movies
 /mnt/pool/Video/TV,Eureeka's Castle/**,The Adventures of Pete & Pete/**,Seinfeld/**,Are You Afraid of the Dark/**,The Sopranos/**,Freaks and Geeks/**,The Golden Girls/**,Frasier/**,Arrested Development/**,Cheers/**,The Twilight Zone/**,Blue's Clues/**,Curb Your Enthusiam/**,The Simpsons/Season [1-10]/**
-/home/david/Documents
+$HOME/Documents
 /mnt/fastpool/Pictures
 /mnt/pool/Music
 /mnt/pool/Video/Movies
